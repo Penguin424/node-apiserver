@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser');
-const routers = require('./routes/usuario');
+const routers = require('./routes/routers');
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
