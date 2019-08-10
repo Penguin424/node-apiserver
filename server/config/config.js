@@ -8,8 +8,6 @@ process.env.PORT = process.env.PORT || 3000;
 ///Etorno 
 ///============
 
-
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 ///============
@@ -34,3 +32,9 @@ if (process.env.NODE_ENV === 'dev') {
     urlDB = process.env.MONGO_URI;
 }
 process.env.URLDB = urlDB;
+
+///============
+///Google client Id
+///============
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '936602344714-tvv2sc0q4vqci57snkue4n721rndd10f.apps.googleusercontent.com';

@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const unVa = require('mongoose-unique-validator');
+const mongoose = require('mongoose'); // Libreria para creacion de schemas en bases de datos de mongoDB
+const unVa = require('mongoose-unique-validator'); // Libreria para validacion de parametos unique y required
 
-let rolesValidos = {
+let rolesValidos = { // Solo un JSON con los roles permitidos para proporcionar al usuario 
     values: ['ADMIN_ROLE', 'USER_ROLE'],
     message: '{VALUE} no es un rol valido'
 }
 
-let Schema = mongoose.Schema;
+let Schema = mongoose.Schema; //Schema para los usuarios 
 
 let usuarioSchema = new Schema({
     nombre: {
@@ -44,7 +44,7 @@ let usuarioSchema = new Schema({
 
 });
 
-usuarioSchema.methods.toJSON = function() {
+usuarioSchema.methods.toJSON = function() { //Oculta las contraseñas de todos los usuarios para que el cliente no las pueda ver
     let user = this;
     let useObject = user.toObject();
     delete useObject.password;
@@ -52,6 +52,6 @@ usuarioSchema.methods.toJSON = function() {
     return useObject;
 }
 
-usuarioSchema.plugin(unVa, { message: '{PATH} debe ser unico' });
+usuarioSchema.plugin(unVa, { message: '{PATH} debe ser unico' }); // Plugin que te muestra error de validacion es para efectutrar los valores unique o rquired en el json del schema para la base de datos
 
-module.exports = mongoose.model('usuario', usuarioSchema);
+module.exports = mongoose.model('usuario', usuarioSchema); // Exportacion del Schema para usuarlo posterior mente
