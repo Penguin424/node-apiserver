@@ -162,10 +162,6 @@ const controller = { // Controller es el JSON utilizado para guardar la logica e
 
             res.json({ ok: true, usuario: userDB, token });
 
-            console.log(token);
-
-
-
         });
 
     },
