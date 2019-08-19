@@ -24,4 +24,19 @@ let verificaRole = (req, res, next) => { //Declaracion de funcion
     }
 }
 
-module.exports = { verificaToken, verificaRole }; // Exporta los middlewares
+//Verficacion de token para imagenes
+let tokenIMG = (req, res, next) => {
+
+    let token = req.query.token;
+
+
+    jwt.verify(token, process.env.SEED, (err, decoded) => { // Verficia token otorgado
+        if (err) return res.status(401).json({ ok: false, err });
+
+        req.usuario = decoded.usuario; //Compara el token requerido con la informacion del usuario y los verifica
+        next(); //Hace que toda la logica dentro del controlador continue despues de implemetar este middleware
+    });
+
+}
+
+module.exports = { verificaToken, verificaRole, tokenIMG }; // Exporta los middlewares

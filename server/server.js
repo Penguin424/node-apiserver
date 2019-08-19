@@ -5,17 +5,20 @@ const app = express(); // Ejecucion de los middle wares o de la app dependiendo 
 const bodyParser = require('body-parser'); // Intermediario para poder requerir los parametros de las peticiones como el body o los headers
 const routers = require('./routes/routers'); // Rutas de peticiones 
 const path = require('path');
+const subirArchivos = require('./controllers/upload');
+
 
 //MIDDLE WARES 
 // Decodificaion de los datos para las peticiones
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, defer: true }));
 // Convercion a formato JSON
 app.use(bodyParser.json());
 // Implementacion de la rutas exportadas 
 app.use(routers);
 //Hablitiar public
 app.use(express.static(path.resolve(__dirname, '../public')));
-
+//Ruta para subida de archivos
+app.use(subirArchivos);
 
 
 // Levantamiento del servidor 
